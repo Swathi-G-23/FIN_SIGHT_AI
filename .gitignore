@@ -1,0 +1,62 @@
+# Git and Docker ignore patterns
+
+# ── Python ────────────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+*.so
+.mypy_cache/
+.ruff_cache/
+
+# ── Virtual environments ──────────────────────────────────────
+venv/
+.venv/
+env/
+.env
+ENV/
+
+# ── Data & indexes (potentially large) ───────────────────────
+data/uploads/*
+data/indexes/*
+data/*.db
+backups/*
+!backups/.gitkeep
+!data/.gitkeep
+!data/uploads/.gitkeep
+!data/indexes/.gitkeep
+
+# ── Generated reports ─────────────────────────────────────────
+reports/*.pdf
+reports/*.md
+!reports/.gitkeep
+
+# ── Logs ─────────────────────────────────────────────────────
+logs/*.log
+!logs/.gitkeep
+
+# ── IDE ──────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# ── OS ───────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Testing ───────────────────────────────────────────────────
+.pytest_cache/
+htmlcov/
+.coverage
+coverage.xml
+
+# ── Jupyter ──────────────────────────────────────────────────
+*.ipynb_checkpoints/

@@ -1,0 +1,43 @@
+# FIN SIGHT AI - Docker Compose
+version: "3.9"
+
+services:
+  fin-sight-ai:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: fin-sight-ai:latest
+    container_name: fin-sight-ai
+    ports:
+      - "8501:8501"
+    environment:
+      - LLM_PROVIDER=${LLM_PROVIDER:-demo}
+      - LLM_MODEL=${LLM_MODEL:-gemini-1.5-flash}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY:-}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - MAX_FILE_SIZE_MB=${MAX_FILE_SIZE_MB:-50}
+      - CHUNK_SIZE=${CHUNK_SIZE:-1000}
+      - CHUNK_OVERLAP=${CHUNK_OVERLAP:-200}
+      - RETRIEVAL_TOP_K=${RETRIEVAL_TOP_K:-5}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+    volumes:
+      # Persist uploaded documents, vector indexes, and generated reports
+      - fin_sight_data:/app/data
+      - fin_sight_reports:/app/reports
+      - fin_sight_logs:/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 45s
+
+volumes:
+  fin_sight_data:
+    driver: local
+  fin_sight_reports:
+    driver: local
+  fin_sight_logs:
+    driver: local

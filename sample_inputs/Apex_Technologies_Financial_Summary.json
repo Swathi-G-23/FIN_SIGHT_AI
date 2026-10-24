@@ -1,0 +1,44 @@
+{
+  "company_name": "Apex Technologies Ltd.",
+  "ticker": "APEX",
+  "fiscal_year": 2023,
+  "reporting_period": "FY2023",
+  "currency": "USD",
+  "scale": "Millions",
+  "income_statement": {
+    "revenue": 124.8,
+    "cogs": 50.5,
+    "gross_profit": 74.3,
+    "operating_expenses": 51.2,
+    "operating_profit": 23.1,
+    "interest_expense": 1.5,
+    "tax_expense": 4.54,
+    "net_profit": 17.06
+  },
+  "balance_sheet": {
+    "current_assets": 64.4,
+    "cash_and_equivalents": 28.2,
+    "inventory": 14.2,
+    "accounts_receivable": 18.4,
+    "current_liabilities": 35.6,
+    "total_debt": 30.4,
+    "total_liabilities": 61.0,
+    "total_equity": 84.0,
+    "total_assets": 145.0
+  },
+  "cash_flow": {
+    "operating_cash_flow": 26.4,
+    "capital_expenditures": -16.2,
+    "free_cash_flow": 10.2
+  },
+  "ratios": {
+    "gross_margin_pct": 59.54,
+    "operating_margin_pct": 18.51,
+    "net_margin_pct": 13.67,
+    "current_ratio": 1.81,
+    "quick_ratio": 1.31,
+    "debt_to_equity": 0.36,
+    "debt_ratio_pct": 42.07,
+    "working_capital_millions": 28.8
+  }
+}
