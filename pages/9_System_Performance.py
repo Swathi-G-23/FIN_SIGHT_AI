@@ -25,19 +25,8 @@ from src.ui.theme import (
 apply_light_theme()
 render_sidebar_brand()
 
-import importlib
-import src.monitoring.performance as perf_module
-import src.monitoring.agent_telemetry as telemetry_module
-
-perf_module = importlib.reload(perf_module)
-telemetry_module = importlib.reload(telemetry_module)
-
-PerformanceMonitor = perf_module.PerformanceMonitor
-agent_telemetry_store = telemetry_module.agent_telemetry_store
-
-# Ensure singleton has latest methods even if Streamlit cached previous module
-if PerformanceMonitor._instance is not None and not hasattr(PerformanceMonitor._instance, "get_application_health"):
-    PerformanceMonitor._instance = None
+from src.monitoring.performance import PerformanceMonitor
+from src.monitoring.agent_telemetry import agent_telemetry_store
 
 monitor = PerformanceMonitor()
 

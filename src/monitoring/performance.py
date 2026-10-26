@@ -54,8 +54,8 @@ class PerformanceMonitor:
     _instance = None
 
     def __new__(cls, db_path: Optional[Path] = None):
-        if cls._instance is None or not hasattr(cls._instance, "get_application_health"):
-            cls._instance = super(PerformanceMonitor, cls).__new__(cls)
+        if cls._instance is None:
+            cls._instance = object.__new__(cls)
             cls._instance._history = []
             cls._instance._benchmarks = []
             cls._instance.db_path = db_path or DB_PATH
