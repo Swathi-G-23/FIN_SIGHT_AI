@@ -23,14 +23,27 @@ for _d in [DATA_DIR, REPORTS_DIR, INDEXES_DIR, UPLOADS_DIR]:
     _d.mkdir(parents=True, exist_ok=True)
 
 # ------------------------------------------------------------------ #
-# LLM Provider
+# LLM Provider & Streamlit Cloud Secrets Fallback
 # ------------------------------------------------------------------ #
-LLM_PROVIDER = os.getenv("LLM_PROVIDER", "demo").lower()
-LLM_MODEL = os.getenv("LLM_MODEL", "gemini-1.5-flash")
+def _get_setting(key: str, default: str = "") -> str:
+    """Retrieve setting from environment variable with Streamlit secrets fallback."""
+    val = os.getenv(key)
+    if val:
+        return val
+    try:
+        import streamlit as st
+        if hasattr(st, "secrets") and key in st.secrets:
+            return str(st.secrets[key])
+    except Exception:
+        pass
+    return default
 
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY", "")
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
-ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
+LLM_PROVIDER = _get_setting("LLM_PROVIDER", "demo").lower()
+LLM_MODEL = _get_setting("LLM_MODEL", "gemini-1.5-flash")
+
+GOOGLE_API_KEY = _get_setting("GOOGLE_API_KEY", "")
+OPENAI_API_KEY = _get_setting("OPENAI_API_KEY", "")
+ANTHROPIC_API_KEY = _get_setting("ANTHROPIC_API_KEY", "")
 
 # Determine if we have a real LLM available
 def is_demo_mode() -> bool:
